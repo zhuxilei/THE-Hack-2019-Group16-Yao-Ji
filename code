@@ -1,0 +1,77 @@
+#include <Arduino.h>
+#include <Wire.h>
+#include <SoftwareSerial.h>
+
+#include <MeOrion.h>
+
+
+double angle_rad = PI/180.0;
+double angle_deg = 180.0/PI;
+double DIS = (ultrasonic_3.distanceCm();
+int buzzer=8
+Servo servo_3_1;
+MePort port_3(3);
+MeUltrasonicSensor ultrasonic_3(3);
+MeRGBLed rgbled_7(7, 4);
+MeRGBLed rgbled_3(3, 4);
+
+
+void setup() 
+{
+
+  Timer1.initialize(28800000000); 
+  Timer1.attachInterrupt( output ); 
+}
+
+
+
+void output()
+{
+    servo_3_1.attach(port_3.pin1());
+    servo_3_1.write(90);
+    servo_3_1.write(90);
+    pinMode(buzzer,OUTPUT)
+    
+    for(i=0;i<3;i++)
+   {
+    digitalWrite(buzzer,HIGH); 
+    delay(1);
+    digitalWrite(buzzer,LOW);
+    delay(1);
+    }
+    
+    if((((DIS) < (10)) && ((DIS) > (5))))
+    {
+        rgbled_7.setColor(0,20,255,0);
+        rgbled_7.show();
+    }
+    else if((((DIS) < (5)) && ((DIS) > (0))))
+    {
+        rgbled_7.setColor(0,255,0,0);
+        rgbled_7.show();
+    }
+    else
+    {
+        rgbled_3.setColor(0,0,0,0);
+        rgbled_3.show();
+    }
+
+    for(i=0;i<3;i++)
+   {
+    digitalWrite(buzzer,HIGH); 
+    delay(1);
+    digitalWrite(buzzer,LOW);
+    delay(1);
+    }
+}
+
+void loop(){
+    
+
+}
+
+void _delay(float seconds){
+    long endTime = millis() + seconds * 1000;
+    while(millis() < endTime)_loop();
+}
+
